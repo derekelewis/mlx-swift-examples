@@ -51,46 +51,8 @@ struct WhisperEvalApp: App {
                 print("Failed to decode JSON: \(error)")
             }
         } else {
-            print("Failed to locate whisper_config.json")
+            print("Failed to locate model_config.json")
         }
-        
-        // Run the encoder
-//        let output_tensor = encoder(input_tensor)
-
-        // test textdecoder
-        
-//        let n_mels = 80
-//        let n_audio_ctx = 1500
-//        let n_audio_state = 384
-//        let n_audio_head = 6
-//        let n_audio_layer = 4
-//        let n_text_ctx=448
-//        let n_text_state=384
-//        let n_text_head=6
-//        let n_text_layer=4
-//        let n_vocab = 51865
-//
-//        MLXRandom.seed(123)
-//        let decoder = TextDecoder(n_vocab: n_vocab, n_ctx: n_text_ctx, n_state: n_text_state, n_head: n_text_head, n_layer: n_text_layer)
-//
-//        // Create a random input tensor
-//        MLXRandom.seed(123)
-//        let audio_input_tensor = MLXRandom.normal([1, n_audio_ctx, n_audio_state])
-//        print("audio_input_tensor:", audio_input_tensor)
-//        MLXRandom.seed(123)
-//        let text_input_tensor = MLXRandom.randInt(0..<n_vocab, [1, 1])
-//        print("text_input_tensor:", text_input_tensor)
-//
-//        // Run the encoder
-//        let (embedding, kvCache, cross_qk) = decoder(text_input_tensor, xa: audio_input_tensor)
-//
-//        print("embedding:", embedding)
-//        print("kvCache:", kvCache)
-//        print("cross_qk", cross_qk)
-        
-//        // Print the output
-//        print("Output tensor shape: \(output_tensor.shape)")
-//        print("Output tensor: \(output_tensor)")
     }
     
     var body: some Scene {
