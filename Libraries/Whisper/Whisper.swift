@@ -153,7 +153,7 @@ public class AudioEncoder: Module {
     
     let conv1: Conv1d
     let conv2: Conv1d
-    let _positional_embedding: MLXArray
+    let positional_embedding: MLXArray
     let blocks: [ResidualAttentionBlock]
     let ln_post: LayerNorm
     
@@ -166,7 +166,7 @@ public class AudioEncoder: Module {
         
         self.conv1 = Conv1d(inputChannels: n_mels, outputChannels: n_state, kernelSize: 3, padding: 1)
         self.conv2 = Conv1d(inputChannels: n_state, outputChannels: n_state, kernelSize: 3, stride: 2, padding: 1)
-        self._positional_embedding = sinusoids(length: n_ctx, channels: n_state).asType(dtype)
+        self.positional_embedding = sinusoids(length: n_ctx, channels: n_state).asType(dtype)
         self.blocks = (0..<n_layer).map { _ in ResidualAttentionBlock(n_state: n_state, n_head: n_head) }
         self.ln_post = LayerNorm(dimensions: n_state)
     }
@@ -176,9 +176,9 @@ public class AudioEncoder: Module {
         new_x = gelu(self.conv1(new_x))
         new_x = gelu(self.conv2(new_x))
         let new_x_shape = ArraySlice(new_x.shape[1...])
-        let positional_embedding_shape = ArraySlice(self._positional_embedding.shape)
+        let positional_embedding_shape = ArraySlice(self.positional_embedding.shape)
         assert(new_x_shape == positional_embedding_shape, "incorrect audio shape")
-        new_x = new_x + self._positional_embedding
+        new_x = new_x + self.positional_embedding
         
         for block in self.blocks {
             (new_x, _, _) = block(new_x)
@@ -252,7 +252,7 @@ public class TextDecoder: Module {
     }
 }
 
-public class Whisper: Module {
+public class WhisperModel: Module {
     
     let dims: WhisperConfiguration
     
