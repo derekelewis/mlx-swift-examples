@@ -259,12 +259,37 @@ public class Whisper: Module {
     public let encoder:AudioEncoder
     public let decoder:TextDecoder
     
-    public init(dims: WhisperConfiguration, dtype:MLX.DType = .float32) {
+    public init(dims: WhisperConfiguration, dtype: MLX.DType = .float32) {
         self.dims = dims
         MLXRandom.seed(123)
         self.encoder = AudioEncoder(n_mels: dims.melsSize, n_ctx: dims.audioContextSize, n_state: dims.audioStateSize, n_head: dims.audioAttentionHeads, n_layer: dims.audioLayers, dtype: dtype)
         MLXRandom.seed(123)
         self.decoder = TextDecoder(n_vocab: dims.vocabularySize, n_ctx: dims.textContextSize, n_state: dims.audioStateSize, n_head: dims.textAttentionHeads, n_layer: dims.textLayers, dtype: dtype)
+    }
+    
+    public func embed_audio(mel: MLXArray) -> MLXArray {
+        return self.encoder(mel)
+    }
+    
+    public func logits(tokens: MLXArray, audio_features: MLXArray) -> MLXArray {
+        return self.decoder(tokens, xa: audio_features).0
+    }
+    
+    public func forward_with_cross_qk(mel: MLXArray, tokens: MLXArray) -> (MLXArray, [MLXArray?]) {
+        let (logits, _, cross_qk) = self.decoder(tokens, xa: self.encoder(mel))
+        return (logits, cross_qk)
+    }
+    
+    public func call(mel: MLXArray, tokens: MLXArray) -> MLXArray {
+        return self.decoder(tokens, xa: self.encoder(mel)).0
+    }
+    
+    public func is_multilingual() -> Bool {
+        return self.dims.vocabularySize >= 51865
+    }
+    
+    public func num_languages() -> Int {
+        return self.dims.vocabularySize - 51765 - (self.is_multilingual() ? 1 : 0)
     }
 }
 
