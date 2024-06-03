@@ -254,10 +254,10 @@ public class TextDecoder: Module {
 
 public class Whisper: Module {
     
-    let dims:WhisperConfiguration
+    let dims: WhisperConfiguration
     
-    public let encoder:AudioEncoder
-    public let decoder:TextDecoder
+    public let encoder: AudioEncoder
+    public let decoder: TextDecoder
     
     public init(dims: WhisperConfiguration, dtype: MLX.DType = .float32) {
         self.dims = dims
