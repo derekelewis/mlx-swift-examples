@@ -261,9 +261,7 @@ public class WhisperModel: Module {
     
     public init(dims: WhisperConfiguration, dtype: MLX.DType = .float32) {
         self.dims = dims
-        MLXRandom.seed(123)
         self.encoder = AudioEncoder(n_mels: dims.melsSize, n_ctx: dims.audioContextSize, n_state: dims.audioStateSize, n_head: dims.audioAttentionHeads, n_layer: dims.audioLayers, dtype: dtype)
-        MLXRandom.seed(123)
         self.decoder = TextDecoder(n_vocab: dims.vocabularySize, n_ctx: dims.textContextSize, n_state: dims.audioStateSize, n_head: dims.textAttentionHeads, n_layer: dims.textLayers, dtype: dtype)
     }
     
@@ -290,6 +288,10 @@ public class WhisperModel: Module {
     
     public func num_languages() -> Int {
         return self.dims.vocabularySize - 51765 - (self.is_multilingual() ? 1 : 0)
+    }
+    
+    public func getDims() -> WhisperConfiguration {
+        return dims
     }
 }
 
