@@ -95,6 +95,10 @@
 		DD2239FE2C0D422E00BA96B9 /* WhisperEvalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2239F82C0D422E00BA96B9 /* WhisperEvalApp.swift */; };
 		DD2239FF2C0D43EB00BA96B9 /* Whisper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD2239C92C0D40C700BA96B9 /* Whisper.framework */; };
 		DD223A002C0D43EB00BA96B9 /* Whisper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD2239C92C0D40C700BA96B9 /* Whisper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DD492CB52C0E1EE60024F6D9 /* LoadWhisper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD492CB42C0E1EE60024F6D9 /* LoadWhisper.swift */; };
+		DD492CB92C0E63D70024F6D9 /* Transformers in Frameworks */ = {isa = PBXBuildFile; productRef = DD492CB82C0E63D70024F6D9 /* Transformers */; };
+		DD492CBB2C14F56C0024F6D9 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD492CBA2C14F56C0024F6D9 /* Tokenizer.swift */; };
+		DDDFA34E2C0D4E3A00419358 /* MLXRandom in Frameworks */ = {isa = PBXBuildFile; productRef = DDDFA34D2C0D4E3A00419358 /* MLXRandom */; };
 		F24B083A2BAF1A65008C8D19 /* Cohere.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24B08392BAF1A65008C8D19 /* Cohere.swift */; };
 /* End PBXBuildFile section */
 
@@ -334,6 +338,8 @@
 		DD2239F62C0D422E00BA96B9 /* model_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = model_config.json; sourceTree = "<group>"; };
 		DD2239F72C0D422E00BA96B9 /* WhisperEval.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = WhisperEval.entitlements; sourceTree = "<group>"; };
 		DD2239F82C0D422E00BA96B9 /* WhisperEvalApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhisperEvalApp.swift; sourceTree = "<group>"; };
+		DD492CB42C0E1EE60024F6D9 /* LoadWhisper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadWhisper.swift; sourceTree = "<group>"; };
+		DD492CBA2C14F56C0024F6D9 /* Tokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
 		F24B08392BAF1A65008C8D19 /* Cohere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cohere.swift; sourceTree = "<group>"; };
 		F8D7023A2BB4E223003D7CF5 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -397,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3FBCB212B8520B80007E490 /* MLX in Frameworks */,
+				DDDFA34E2C0D4E3A00419358 /* MLXRandom in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +440,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD492CB92C0E63D70024F6D9 /* Transformers in Frameworks */,
 				DD2239DE2C0D412700BA96B9 /* MLXNN in Frameworks */,
 				DD2239DC2C0D412000BA96B9 /* MLX in Frameworks */,
 			);
@@ -693,6 +701,8 @@
 				DD2239D42C0D40FB00BA96B9 /* Audio.swift */,
 				DD2239D52C0D40FB00BA96B9 /* Whisper.h */,
 				DD2239D62C0D40FB00BA96B9 /* Whisper.swift */,
+				DD492CB42C0E1EE60024F6D9 /* LoadWhisper.swift */,
+				DD492CBA2C14F56C0024F6D9 /* Tokenizer.swift */,
 			);
 			path = Whisper;
 			sourceTree = "<group>";
@@ -880,6 +890,7 @@
 			name = Tutorial;
 			packageProductDependencies = (
 				C3FBCB202B8520B80007E490 /* MLX */,
+				DDDFA34D2C0D4E3A00419358 /* MLXRandom */,
 			);
 			productName = Tutorial;
 			productReference = C39273742B606A0A00368D5D /* Tutorial */;
@@ -970,6 +981,7 @@
 			packageProductDependencies = (
 				DD2239DB2C0D412000BA96B9 /* MLX */,
 				DD2239DD2C0D412700BA96B9 /* MLXNN */,
+				DD492CB82C0E63D70024F6D9 /* Transformers */,
 			);
 			productName = Whisper;
 			productReference = DD2239C92C0D40C700BA96B9 /* Whisper.framework */;
@@ -1242,7 +1254,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD2239DA2C0D40FB00BA96B9 /* Whisper.swift in Sources */,
+				DD492CBB2C14F56C0024F6D9 /* Tokenizer.swift in Sources */,
 				DD2239D82C0D40FB00BA96B9 /* Audio.swift in Sources */,
+				DD492CB52C0E1EE60024F6D9 /* LoadWhisper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2558,7 +2572,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_ASSET_PATHS = "\"Applications/LLMEval/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 32JPGLH2DK;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2596,7 +2610,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = mlx.LLMEval;
+				PRODUCT_BUNDLE_IDENTIFIER = mlx.LLMEval.derek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
@@ -2649,7 +2663,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Applications/LLMEval/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 32JPGLH2DK;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2681,7 +2695,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = mlx.LLMEval;
+				PRODUCT_BUNDLE_IDENTIFIER = mlx.LLMEval.derek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
@@ -3328,6 +3342,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C3FBCB1F2B8520B00007E490 /* XCRemoteSwiftPackageReference "mlx-swift" */;
 			productName = MLXNN;
+		};
+		DD492CB82C0E63D70024F6D9 /* Transformers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C38935BB2B866BFA0037B833 /* XCRemoteSwiftPackageReference "swift-transformers" */;
+			productName = Transformers;
+		};
+		DDDFA34D2C0D4E3A00419358 /* MLXRandom */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3FBCB1F2B8520B00007E490 /* XCRemoteSwiftPackageReference "mlx-swift" */;
+			productName = MLXRandom;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
