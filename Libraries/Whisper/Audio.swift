@@ -70,3 +70,17 @@ public class AudioLoader {
         return MLXArray(audioData)
     }
 }
+
+public func hanningWindow(length: Int) -> MLXArray {
+    guard length > 1 else { return MLXArray(converting: [1.0]) }
+    
+    let pi = Double.pi
+    let n = Double(length - 1)
+    
+    var window = [Double](repeating: 0.0, count: length)
+    for i in 0..<length {
+        window[i] = 0.5 * (1 - cos(2 * pi * Double(i) / n))
+    }
+    
+    return MLXArray(converting: window)
+}

@@ -35,9 +35,10 @@ struct WhisperEvalApp: App {
             let text_input_tensor = MLXRandom.randInt(0..<config.vocabularySize, [1, 1])
             print("text_input_tensor:", text_input_tensor)
             let encoder_output = model.encoder(audio_input_tensor)
-            let decoder_output = model.decoder(text_input_tensor, xa: encoder_output)
-            print("encoder output:", encoder_output)
-            print("decoder output:", decoder_output)
+            let (logits, _, _) = model.decoder(text_input_tensor, xa: encoder_output)
+            let tokenizer = try await WhisperTokenizer()
+            print(logits)
+            print(hanningWindow(length: 10))
         } catch {
             print("Failed to load model \(error)")
         }
