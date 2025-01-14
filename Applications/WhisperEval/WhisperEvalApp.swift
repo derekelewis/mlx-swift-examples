@@ -37,7 +37,7 @@ struct WhisperEvalApp: App {
             let encoder_output = model.encoder(audio_input_tensor)
             let (logits, _, _) = model.decoder(text_input_tensor, xa: encoder_output)
             let tokenizer = try await WhisperTokenizer()
-            print(logits)
+            eval(logits)
             print(hanningWindow(length: 10))
         } catch {
             print("Failed to load model \(error)")
